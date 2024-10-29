@@ -37,16 +37,7 @@ chown -R prometheus:prometheus /var/lib/prometheus
 cd ../
 
 # Copy the base prometheus config content to the actual config file - with sudo
-cp prometheus.yml /etc/prometheus/prometheus.yml
-
-# Create prometheus systemd service and reload systemd - with sudo
-cp prometheus.service /etc/systemd/system/prometheus.service
-systemctl daemon-reload
-
-# Start prometheus service - with sudo
-systemctl enable prometheus
-systemctl start prometheus
-systemctl status prometheus
+cp config_files/prometheus.yml /etc/prometheus/prometheus.yml
 
 # Accessing prometheus interface - with sudo
 ufw allow 9090/tcp
