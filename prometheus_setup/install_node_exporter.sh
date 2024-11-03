@@ -5,4 +5,4 @@ tar xvfz node_exporter-*.*-amd64.tar.gz
 mv node_exporter-*.*-amd64 /etc/node_exporter-*.*-amd64
 rm node_exporter-*.*-amd64.tar.gz
 cd /etc/node_exporter-*.*-amd64
-./node_exporter
+./node_exporter &
