@@ -38,6 +38,7 @@ cd ../
 
 # Copy the base prometheus config content to the actual config file - with sudo
 cp config_files/prometheus.yml /etc/prometheus/prometheus.yml
+cp config_files/prometheus.rules.yml /etc/prometheus/prometheus.rules.yml
 
 # Accessing prometheus interface - with sudo
 ufw allow 9090/tcp
