@@ -1,0 +1,25 @@
+# Using the expression browser - available metrics we can query:
+
+prometheus_target_interval_length_seconds
+prometheus_target_interval_length_seconds{quantile="0.99"}
+count(prometheus_target_interval_length_seconds)
+
+# Using the graphing interface:
+
+rate(prometheus_tsdb_head_chunks_created_total[1m])
+
+# Rules examples:
+
+avg by (job, instance, mode) (rate(node_cpu_seconds_total[5m]))
+
+- after creating the rule with this name we can query it like a metric:
+job_instance_mode:node_cpu_seconds:avg_rate5m
+
+
+# Reload configuration:
+
+- without restarting the process with the SIGHUP signal
+kill -s SIGHUP <PID>
+
+- kill gracefully
+kill -s SIGTERM <PID>
