@@ -30,7 +30,6 @@ chown prometheus:prometheus /usr/local/bin/promtool
 mv consoles /etc/prometheus
 mv console_libraries /etc/prometheus
 mv prometheus.yml /etc/prometheus
-chown prometheus:prometheus /etc/prometheus
 chown -R prometheus:prometheus /etc/prometheus/consoles
 chown -R prometheus:prometheus /etc/prometheus/console_libraries
 chown -R prometheus:prometheus /var/lib/prometheus
@@ -40,6 +39,8 @@ chown -R prometheus:prometheus /var/lib/prometheus
 # # Copy the base prometheus config content to the actual config file - with sudo
 # cp config_files/prometheus.yml /etc/prometheus/prometheus.yml
 # cp config_files/prometheus.rules.yml /etc/prometheus/prometheus.rules.yml
+# chown prometheus:prometheus /etc/prometheus/prometheus.rules.yml
+# chown prometheus:prometheus /etc/prometheus/prometheus.yml
 
 # Accessing prometheus interface - with sudo
 ufw allow 9090/tcp

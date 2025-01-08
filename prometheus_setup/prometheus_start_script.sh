@@ -8,7 +8,7 @@ then
 
     # Start prometheus service - with sudo
     systemctl enable prometheus
-    systemctl start prometheus &&
+    systemctl start prometheus &
     systemctl status prometheus
 
 elif [ "$#" -eq 1 ] && [ $1 = "wsl" ]
