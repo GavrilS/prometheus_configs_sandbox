@@ -13,9 +13,10 @@ mkdir /etc/prometheus
 mkdir /var/lib/prometheus
 
 # Download prometheus and extract files
+cd /tmp/
 wget https://github.com/prometheus/prometheus/releases/download/v2.55.0/prometheus-2.55.0.linux-amd64.tar.gz
 
-tar vxf prometheus*.tar.gz
+tar vxf /tmp/prometheus*.tar.gz
 
 cd prometheus*/
 
@@ -34,11 +35,11 @@ chown -R prometheus:prometheus /etc/prometheus/consoles
 chown -R prometheus:prometheus /etc/prometheus/console_libraries
 chown -R prometheus:prometheus /var/lib/prometheus
 
-cd ../
+# cd ../
 
-# Copy the base prometheus config content to the actual config file - with sudo
-cp config_files/prometheus.yml /etc/prometheus/prometheus.yml
-cp config_files/prometheus.rules.yml /etc/prometheus/prometheus.rules.yml
+# # Copy the base prometheus config content to the actual config file - with sudo
+# cp config_files/prometheus.yml /etc/prometheus/prometheus.yml
+# cp config_files/prometheus.rules.yml /etc/prometheus/prometheus.rules.yml
 
 # Accessing prometheus interface - with sudo
 ufw allow 9090/tcp
