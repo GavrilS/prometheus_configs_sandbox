@@ -7,7 +7,7 @@ global:
     monitor: 'prometheus_tutorial'
 
 rule_files:
-  - '/etc/prometheus/prometheus.rules.yml'
+  - /etc/prometheus/prometheus.rules.yml
 
 # A scrape configuration
 scrape_configs:
