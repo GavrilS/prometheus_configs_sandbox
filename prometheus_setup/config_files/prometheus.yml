@@ -26,3 +26,7 @@ scrape_configs:
       - targets: ['localhost:9100']
         labels:
           group: 'qa'
+
+  - job_name: custom-python
+    static_configs:
+      - targets: ['localhost:8008']
