@@ -2,6 +2,7 @@
 A script to test creating custome Prometheus metrics with python.
 """
 import time
+from datetime import datetime
 from prometheus_client import start_http_server, Counter, Gauge
 import psutil
 
@@ -11,6 +12,9 @@ MEMORY_UTIL_PERCENT = Gauge('memory_util_percent', 'Memory util percentage', ['s
 
 HIGH_THRESHOLD = 85
 CRITICAL_THRESHOLD = 98
+
+WAIT_TIME_SECONDS = 5
+MAX_RUNNING_TIME_SECONDS = 300
 
 def set_status_label(util_percent):
     if util_percent >= HIGH_THRESHOLD and util_percent < CRITICAL_THRESHOLD:
@@ -27,7 +31,7 @@ def main():
     flag = True
     counter = 0
     while flag:
-        counter += 1
+        counter += WAIT_TIME_SECONDS
         CHECK_COUNTER.inc()
         cpu_perc = psutil.cpu_percent(interval=1)
         mem_perc = psutil.virtual_memory().percent
@@ -35,11 +39,14 @@ def main():
         CPU_UTIL_PERCENT.labels(status=set_status_label(cpu_perc)).set(cpu_perc)
         MEMORY_UTIL_PERCENT.labels(status=set_status_label(mem_perc)).set(mem_perc)
 
-        if counter > 100:
+        if counter > MAX_RUNNING_TIME_SECONDS:
             break
         
-        time.sleep(5)
+        time.sleep(WAIT_TIME_SECONDS)
 
 
 if __name__=='__main__':
+    print('Start time: ', str(datetime.now()))
+    print('The script will run for ', str(MAX_RUNNING_TIME_SECONDS/60), 'minutes...')
     main()
+    print('Script completed...')
