@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create a user and group for the prometheus pushgate
-useradd -M -r -s /bin/false pushgate
+useradd -M -r -s /bin/false pushgateway
 
 # Download and install the Pushgate binary
 wget https://github.com/prometheus/pushgateway/releases/download/v1.2.0/pushgateway-1.2.0.linux-amd64.tar.gz
@@ -13,6 +13,7 @@ mv pushgateway-1.2.0.linux-amd64/pushgateway /usr/local/bin/
 chown pushgateway:pushgateway /usr/local/bin/pushgateway
 
 rm pushgateway-1.2.0.linux-amd64.tar.gz
+rm -rf pushgateway-1.2.0.linux-amd64/
 
 # Create a systemd unit file for Pushgateway
 cp config_files/pushgateway.service /etc/systemd/system/
