@@ -30,3 +30,7 @@ scrape_configs:
   - job_name: custom-python
     static_configs:
       - targets: ['localhost:8008']
+
+  - job_name: prometheus_pushgateway
+    static_configs:
+      - targets: ['localhost:9091']
