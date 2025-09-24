@@ -12,7 +12,7 @@ def main():
 
 
         g.labels(deployment='remote_write', namespace='python-test', max_replicas='3', environment='test').inc(10)
-        print('Current deployment metrics: \n', g._value)
+        print('Current deployment metrics: \n', g.__dict__)
         # g.inc(10)
         # g.set_to_current_time()
 
