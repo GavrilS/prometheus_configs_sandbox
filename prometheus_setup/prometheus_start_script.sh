@@ -7,7 +7,7 @@ then
     systemctl daemon-reload
 
     # Start prometheus service - with sudo
-    systemctl enable prometheus
+    # systemctl enable prometheus
     systemctl start prometheus &
     systemctl status prometheus
 

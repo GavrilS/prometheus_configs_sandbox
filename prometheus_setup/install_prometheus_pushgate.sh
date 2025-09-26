@@ -19,7 +19,7 @@ rm -rf pushgateway-1.2.0.linux-amd64/
 cp config_files/pushgateway.service /etc/systemd/system/
 
 # Start and enable the pushgateway service
-systemctl enable pushgateway
+# systemctl enable pushgateway
 
 systemctl start pushgateway
 
