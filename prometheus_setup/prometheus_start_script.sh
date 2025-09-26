@@ -18,7 +18,8 @@ then
     --config.file /etc/prometheus/prometheus.yml \
     --storage.tsdb.path /var/lib/prometheus/ \
     --web.console.templates=/etc/prometheus/consoles \
-    --web.console.libraries=/etc/prometheus/console_libraries &
+    --web.console.libraries=/etc/prometheus/console_libraries \
+    --web.enable-remote-write-receiver &
 fi
 
 # Accessing prometheus interface - with sudo

@@ -19,6 +19,7 @@ def main():
         response = requests.post(PROMETHEUS_WRITE_URL, json=metrics, headers=headers, verify=False)
 
         print('Response: ', response)
+        print(response.text)
         # print(response.json())
         print('*'*100)
 
