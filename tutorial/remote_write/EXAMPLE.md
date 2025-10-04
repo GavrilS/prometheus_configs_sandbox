@@ -13,6 +13,9 @@
     source env/bin/activate
 
  - run the protobuf compiler on the metrics.proto file to build the python dependency
+
+    /usr/local/bin/protoc --proto_path=./tutorial/remote_write/ --python_out=./tutorial/remote_write/ ./tutorial/remote_write/metrics.proto
+
  - run the send_custom_metrics.py script:
 
     python3 send_custom_metrics.py
