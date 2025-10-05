@@ -20,12 +20,13 @@ def main():
     while True:
         timestamp = datetime.now().timestamp()
 
-        metrics = generate_metrics(timestamp)
+        metrics = generate_metrics(int(timestamp))
+        
+        populate_timeseries(python_test_series, metrics[0])
+        populate_timeseries(random_test_series, metrics[1])
+        populate_timeseries(duplication_test_series, metrics[2])
 
-        for metric in metrics:
-            pass
-
-        response = requests.post(PROMETHEUS_WRITE_URL, json=metrics, headers=headers, verify=False)
+        response = requests.post(PROMETHEUS_WRITE_URL, data=write_message, headers=headers, verify=False)
 
         print('Response: ', response)
         print(response.text)
@@ -34,6 +35,15 @@ def main():
 
         time.sleep(30)
 
+def populate_timeseries(timeseries, metric):
+    for key, value in metric['labels'].items():
+        label = timeseries.labels.add()
+        label.name = key
+        label.value = value
+    
+    sample = timeseries.samples.add()
+    sample.value = metric['value'][1]
+    sample.timestamp = metric['value'][0]
 
 def set_request_headers():
     headers = {
@@ -54,7 +64,7 @@ def generate_metrics(timestamp):
                 'instance': 'localhost:9090',
                 'job': 'python'
             },
-            'value': [timestamp, '1']
+            'value': [timestamp, 1]
         },
         {
             'labels': {
@@ -62,7 +72,7 @@ def generate_metrics(timestamp):
                 'instance': 'localhost:9090',
                 'job': 'python'
             },
-            'value': [timestamp, '10']
+            'value': [timestamp, 10]
         },
         {
             'labels': {
@@ -70,7 +80,7 @@ def generate_metrics(timestamp):
                 'instance': 'localhost:9090',
                 'job': 'python'
             },
-            'value': [timestamp, '100.2']
+            'value': [timestamp, 100]
         }
     ]
 
