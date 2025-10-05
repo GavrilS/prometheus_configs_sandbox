@@ -6,6 +6,7 @@ import time
 from datetime import datetime
 import requests
 import metrics_pb2
+import snappy
 
 PROMETHEUS_WRITE_URL = 'http://localhost:9090/api/v1/write'
 
@@ -25,8 +26,9 @@ def main():
         populate_timeseries(python_test_series, metrics[0])
         populate_timeseries(random_test_series, metrics[1])
         populate_timeseries(duplication_test_series, metrics[2])
+        snappy_data = snappy.compress(write_message.SerializeToString())
 
-        response = requests.post(PROMETHEUS_WRITE_URL, data=write_message, headers=headers, verify=False)
+        response = requests.post(PROMETHEUS_WRITE_URL, data=snappy_data, headers=headers, verify=False)
 
         print('Response: ', response)
         print(response.text)
